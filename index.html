@@ -179,6 +179,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(122, 182, 72, 0.2);
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary:hover {
@@ -204,12 +206,11 @@
         }
 
         .bubbles-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px 12px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px 24px;
             margin-bottom: 30px;
-            max-width: 750px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -217,95 +218,21 @@
         .bubble {
             background-color: var(--primary-green-bg);
             color: var(--primary-green);
-            padding: 10px 22px;
+            padding: 10px 12px;
             border-radius: 50px;
             font-size: 15px;
             font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            cursor: default;
+            transition: background-color 0.2s ease, color 0.2s ease;
             user-select: none;
-            position: relative;
-            transform: translateY(0); 
+            text-align: center;
+            box-sizing: border-box;
+            white-space: nowrap;
         }
-
-        .bubble:nth-child(3n) { transform: translateY(8px); }
-        .bubble:nth-child(3n + 1) { transform: translateY(-6px); }
-        .bubble:nth-child(5n) { transform: translateY(12px); }
 
         .bubble:hover {
             background-color: var(--primary-green);
             color: white;
-            box-shadow: 0 4px 12px rgba(122, 182, 72, 0.25);
-            transform: scale(1.08) translateY(0) !important;
-            z-index: 2;
-        }
-
-        .bubble-editing {
-            background-color: white;
-            border: 1.5px solid var(--primary-green);
-            padding: 0;
-            overflow: visible;
-            display: flex;
-            align-items: center;
-            transform: translateY(0) !important;
-        }
-
-        .bubble-editing input {
-            border: none;
-            outline: none;
-            background: transparent;
-            padding: 10px 12px;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-dark);
-            width: 100px;
-            font-family: inherit;
-        }
-
-        .delete-skill-btn {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 18px;
-            height: 18px;
-            background-color: #e74c3c;
-            color: white;
-            border: 2px solid white;
-            border-radius: 50%;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-            line-height: 1;
-        }
-
-        .delete-skill-btn:hover {
-            transform: scale(1.2);
-        }
-
-        .add-bubble-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: var(--primary-green);
-            color: white;
-            border: none;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin: 0 auto;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(122, 182, 72, 0.2);
-        }
-
-        .add-bubble-btn:hover {
-            background-color: var(--primary-green-light);
-            transform: scale(1.1);
         }
 
         /* === 工作复盘分区 === */
@@ -340,7 +267,6 @@
             font-size: 16px;
             color: var(--text-dark);
             font-weight: 600;
-            padding-right: 80px;
         }
 
         .card-content {
@@ -353,55 +279,25 @@
         }
 
         .review-card.active .card-content {
-            max-height: 1000px;
+            max-height: 2000px; 
             padding-top: 16px;
             padding-bottom: 30px;
         }
 
-        .card-actions {
-            position: absolute;
-            top: 18px;
-            right: 20px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            color: var(--text-gray);
-            font-size: 12px;
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        .action-btn:hover {
-            color: var(--primary-green);
-            background-color: var(--primary-green-bg);
-        }
-
-        .action-btn.delete-btn:hover {
-            color: #e74c3c;
-            background-color: #fdf0ef;
-        }
-
-        /* 复盘内容中的图片排版容器 */
+        /* === 复盘图片排版：整体缩小并居中 === */
         .project-images-layout {
             display: flex;
-            justify-content: flex-start;
-            gap: 16px; /* 适当间距 */
-            margin-top: 25px;
-            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-width: 480px; /* 限制整体最大宽度，让图片组显著缩小 */
+            margin: 40px auto 10px auto; /* 上下间距拉大(40px)，左右自动居中 */
         }
 
-        /* 图片框通用样式 */
         .project-image-box {
             overflow: hidden;
             background-color: var(--primary-green-bg);
-            border-radius: 16px; /* 大圆角 */
-            border: none; /* 无边框颜色 */
+            border-radius: 0; /* 直角 */
+            border: none; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             cursor: pointer;
@@ -421,81 +317,19 @@
             object-fit: cover;
         }
 
-        /* 竖版长图框 (宽:高 = 1:2.5) */
+        /* 上排：4个竖版图 */
         .vertical-box {
-            width: 100px;
-            height: 250px;
+            width: calc(25% - 6px); 
+            aspect-ratio: 1 / 2.5; 
         }
 
-        /* 横版长图框组合 (右侧竖向排列两个) */
-        .horizontal-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        /* 横版长图框 (宽:高 = 2.5:1) */
+        /* 下排：2个横版图 */
         .horizontal-box {
-            width: 250px; /* 100 * 2.5 */
-            height: 100px;
+            width: calc(50% - 4px); 
+            aspect-ratio: 2.5 / 1; 
         }
 
-        /* 编辑框样式 */
-        .entry-editor {
-            background-color: var(--primary-green-bg);
-            border: 1px solid var(--primary-green-light);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 16px;
-            position: relative;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .entry-editor input, .entry-editor textarea {
-            width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 12px;
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 14px;
-            background: white;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .entry-editor input:focus, .entry-editor textarea:focus {
-            border-color: var(--primary-green);
-        }
-
-        .entry-editor textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        .editor-footer {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .btn-save {
-            background-color: var(--primary-green);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-
-        .btn-save:hover {
-            background-color: var(--primary-green-light);
-        }
-
-        /* === 致谢分区 - 恢复纯文字居中 === */
+        /* === 致谢分区 === */
         #thanks {
             text-align: center;
             padding-top: 100px;
@@ -530,15 +364,25 @@
             }
             .bubbles-container {
                 max-width: 100%;
+                grid-template-columns: repeat(3, 1fr);
             }
-            /* 移动端图片框按比例缩小 */
+            .bubble {
+                font-size: 14px;
+                white-space: normal;
+            }
+            /* 移动端图片组占满卡片宽度，不再强制480px */
+            .project-images-layout {
+                max-width: 100%;
+                margin: 30px auto 10px auto;
+            }
             .vertical-box {
-                width: 70px;
-                height: 175px;
+                width: calc(25% - 6px);
             }
             .horizontal-box {
-                width: 175px; /* 70 * 2.5 */
-                height: 70px;
+                width: calc(50% - 4px);
+            }
+            .project-images-layout {
+                gap: 6px; 
             }
         }
         
@@ -569,13 +413,15 @@
     <section id="hero" class="container hero">
         <div class="hero-image">
             <div class="circular-frame">
-                <img src="https://placehold.co/400x400/A5D674/FFFFFF?text=Reese" alt="Reese Hu's Photo">
+                <img src="images/avatar.jpg" alt="Reese Hu's Photo">
             </div>
         </div>
         <div class="hero-text">
-            <h1 data-i18n-html="heroTitle">Hi, <span>Reese Hu.</span></h1>
-            <p data-i18n="heroDesc">This is a record of my professional journey and project reviews. More than just lines on a resume, it's the real trajectory of deep thinking, problem-solving, and skill accumulation. Keep reviewing, keep evolving.</p>
-            <button class="btn-primary" onclick="addNewEntry()" data-i18n="heroBtn">Add Entry</button>
+            <h1 data-i18n-html="heroTitle">Hi, <span>I am Reese.</span></h1>
+            <p data-i18n="heroDesc">This is a record of my professional journey and project reviews.<br />
+                 More than just lines on a resume, it's the real trajectory of deep thinking, problem-solving, and skill accumulation. <br />
+                 Keep reviewing, keep evolving.</p>
+            <a href="#reviews" class="btn-primary" data-i18n="heroBtn">View Reviews</a>
         </div>
     </section>
 
@@ -586,7 +432,6 @@
         </div>
         <div class="bubbles-container" id="bubbles-container">
         </div>
-        <button class="add-bubble-btn" onclick="addSkill()">+</button>
     </section>
 
     <!-- 工作复盘分区 -->
@@ -610,42 +455,64 @@
             zh: {
                 navIntro: '自我介绍',
                 navSkills: '技能',
-                navReviews: '复盘',
-                navThanks: '致谢',
-                heroTitle: '你好, <span style="color: var(--primary-green)">Reese Hu.</span>',
-                heroDesc: '这里记录着我的职业旅程与项目复盘。不仅仅是简历上的几行字，更是深度思考、解决问题与技能沉淀的真实轨迹。保持复盘，持续进化。',
-                heroBtn: '添加复盘',
+                navReviews: '经历复盘',
+                navThanks: '谢谢',
+                heroTitle: '你好， <span style="color: var(--primary-green)">我是Reese.</span>',
+                heroDesc: '我喜欢接受有挑战性的工作、喜欢从工作中学到新东西的过程。\n我不断学习新的技能，乐于接受新鲜事物。\n下面我的复盘将展示我的思维、行为模式，以及我是一个什么样的人。',
+                heroBtn: '查看复盘',
                 skillsTitle: '我的技能',
-                skillsList: ['项目管理', 'Python', '需求分析', 'SQL', 'Figma', '敏捷开发', '数据分析', 'Axure RP', '跨部门协作', 'JavaScript', '流程优化', 'Tableau'],
+                skillsList: ['Excel', 'SPSS', 'Stata', 'SQL', 'Canva', '秀米', '数据分析', '英语流利', 'PPT', '办公工具', '项目管理', '用户调研'],
                 reviewsTitle: '工作复盘',
                 reviews: [
                     {
-                        title: '电商平台用户增长策略复盘',
-                        content: '<strong>项目背景：</strong>Q3季度平台新用户获取成本上升，需要优化增长漏斗。<br><strong>我的角色：</strong>增长产品经理<br><strong>行动与产出：</strong>重新设计了新用户Onboarding流程，引入社交裂变机制。通过A/B测试验证，最终将转化率提升了15%，获客成本降低20%。此项目锻炼了我的数据驱动决策与跨部门沟通能力。'
-                    },
-                    {
                         title: '内部数据看板系统从0到1搭建',
-                        // 4个竖版长图 + 右侧竖向排列2个横版长图
-                        content: `<strong>项目背景：</strong>业务团队缺乏实时数据监控工具，决策滞后。<br><strong>我的角色：</strong>项目负责人<br><strong>行动与产出：</strong>从需求调研、指标定义到最终看板上线，全程主导。使用Tableau+SQL搭建了核心业务指标看板，将业务团队获取数据的时间从1天缩短至5分钟。极大提升了团队对敏捷项目管理的认知。
+                        content: `<strong>项目名称：</strong>业务团队缺乏实时数据监控工具，决策滞后。<br><strong>我的角色：</strong>项目负责人<br><strong>行动与产出：</strong>从需求调研、指标定义到最终看板上线，全程主导。使用Tableau+SQL搭建了核心业务指标看板，将业务团队获取数据的时间从1天缩短至5分钟。极大提升了团队对敏捷项目管理的认知。
                         <div class="project-images-layout">
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/A5D674/FFFFFF?text=V+1" alt="Vertical Photo 1"></div>
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/7AB648/FFFFFF?text=V+2" alt="Vertical Photo 2"></div>
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/A5D674/FFFFFF?text=V+3" alt="Vertical Photo 3"></div>
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/7AB648/FFFFFF?text=V+4" alt="Vertical Photo 4"></div>
-                            <div class="horizontal-stack">
-                                <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/A5D674/FFFFFF?text=H+1" alt="Horizontal Photo 1"></div>
-                                <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/7AB648/FFFFFF?text=H+2" alt="Horizontal Photo 2"></div>
-                            </div>
+                            <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/A5D674/FFFFFF?text=H+1" alt="Horizontal Photo 1"></div>
+                            <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/7AB648/FFFFFF?text=H+2" alt="Horizontal Photo 2"></div>
                         </div>`
+                    },
+                    {
+                        title: '电商平台用户增长策略复盘',
+                        content: '<strong>项目背景：</strong>111。<br><strong>项目目标：</strong>111。<br><strong>工作步骤：</strong>111。<br><strong>项目成果：</strong>111。<br><strong>收获与反思：</strong>111。'
+                    },
+                    {
+                        title: '新市场拓展计划执行复盘',
+                        content: '<strong>项目背景：</strong>222。<br><strong>项目目标：</strong>222。<br><strong>工作步骤：</strong>222。<br><strong>项目成果：</strong>222。<br><strong>收获与反思：</strong>222。'
+                    },
+                    {
+                        title: '供应链流程优化复盘',
+                        content: '<strong>项目背景：</strong>333。<br><strong>项目目标：</strong>333。<br><strong>工作步骤：</strong>333。<br><strong>项目成果：</strong>333。<br><strong>收获与反思：</strong>333。'
+                    },
+                    {
+                        title: '客户满意度提升方案复盘',
+                        content: '<strong>项目背景：</strong>444。<br><strong>项目目标：</strong>444。<br><strong>工作步骤：</strong>444。<br><strong>项目成果：</strong>444。<br><strong>收获与反思：</strong>444。'
+                    },
+                    {
+                        title: '年度大促活动统筹复盘',
+                        content: '<strong>项目背景：</strong>555。<br><strong>项目目标：</strong>555。<br><strong>工作步骤：</strong>555。<br><strong>项目成果：</strong>555。<br><strong>收获与反思：</strong>555。'
+                    },
+                    {
+                        title: '跨部门协同机制建设复盘',
+                        content: '<strong>项目背景：</strong>666。<br><strong>项目目标：</strong>666。<br><strong>工作步骤：</strong>666。<br><strong>项目成果：</strong>666。<br><strong>收获与反思：</strong>666。'
+                    },
+                    {
+                        title: '产品核心功能改版复盘',
+                        content: '<strong>项目背景：</strong>777。<br><strong>项目目标：</strong>777。<br><strong>工作步骤：</strong>777。<br><strong>项目成果：</strong>777。<br><strong>收获与反思：</strong>777。'
+                    },
+                    {
+                        title: '品牌升级与视觉重塑复盘',
+                        content: '<strong>项目背景：</strong>888。<br><strong>项目目标：</strong>888。<br><strong>工作步骤：</strong>888。<br><strong>项目成果：</strong>888。<br><strong>收获与反思：</strong>888。'
+                    },
+                    {
+                        title: '后续优化与迭代计划复盘',
+                        content: '<strong>项目背景：</strong>999。<br><strong>项目目标：</strong>999。<br><strong>工作步骤：</strong>999。<br><strong>项目成果：</strong>999。<br><strong>收获与反思：</strong>999。'
                     }
                 ],
-                editBtn: '编辑',
-                deleteBtn: '删除',
-                saveBtn: '保存复盘',
-                saveEditBtn: '保存修改',
-                titlePlaceholder: '请输入项目名称...',
-                contentPlaceholder: '请输入项目复盘内容...',
-                deleteConfirm: '确定要删除这条复盘记录吗？',
                 thanksTitle: 'Thanks for Visiting!',
                 thanksDesc: 'Please feel free to reach out'
             },
@@ -656,38 +523,60 @@
                 navThanks: 'Thanks',
                 heroTitle: 'Hi, <span style="color: var(--primary-green)">Reese Hu.</span>',
                 heroDesc: 'This is a record of my professional journey and project reviews. More than just lines on a resume, it\'s the real trajectory of deep thinking, problem-solving, and skill accumulation. Keep reviewing, keep evolving.',
-                heroBtn: 'Add Entry',
+                heroBtn: 'View Reviews',
                 skillsTitle: 'My Skills',
-                skillsList: ['Project Management', 'Python', 'Requirement Analysis', 'SQL', 'Figma', 'Agile Dev', 'Data Analysis', 'Axure RP', 'Cross-dept Collab', 'JavaScript', 'Process Optimization', 'Tableau'],
+                skillsList: ['Project Mgmt', 'Python', 'Req Analysis', 'SQL', 'Figma', 'Agile Dev', 'Data Analysis', 'Axure RP', 'Cross Collab', 'JavaScript', 'Process Opt', 'Tableau'],
                 reviewsTitle: 'Work Reviews',
                 reviews: [
                     {
-                        title: 'E-commerce User Growth Strategy Review',
-                        content: '<strong>Background:</strong> Rising user acquisition costs in Q3, needing to optimize the growth funnel.<br><strong>My Role:</strong> Growth Product Manager<br><strong>Actions & Outcomes:</strong> Redesigned the new user onboarding process and introduced social referral mechanisms. Verified through A/B testing, ultimately increasing conversion rate by 15% and reducing acquisition cost by 20%. This project honed my data-driven decision-making and cross-departmental communication skills.'
-                    },
-                    {
                         title: 'Internal Data Dashboard System Build from 0 to 1',
-                        // 4 vertical boxes + 2 horizontal boxes stacked vertically on the right
                         content: `<strong>Background:</strong> Business teams lacked real-time data monitoring tools, causing delayed decisions.<br><strong>My Role:</strong> Project Lead<br><strong>Actions & Outcomes:</strong> Led the entire process from requirement gathering and metric definition to final dashboard launch. Built core business metric dashboards using Tableau+SQL, reducing the time for business teams to access data from 1 day to 5 minutes. Greatly enhanced the team's understanding of agile project management.
                         <div class="project-images-layout">
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/A5D674/FFFFFF?text=V+1" alt="Vertical Photo 1"></div>
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/7AB648/FFFFFF?text=V+2" alt="Vertical Photo 2"></div>
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/A5D674/FFFFFF?text=V+3" alt="Vertical Photo 3"></div>
                             <div class="project-image-box vertical-box"><img src="https://placehold.co/200x500/7AB648/FFFFFF?text=V+4" alt="Vertical Photo 4"></div>
-                            <div class="horizontal-stack">
-                                <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/A5D674/FFFFFF?text=H+1" alt="Horizontal Photo 1"></div>
-                                <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/7AB648/FFFFFF?text=H+2" alt="Horizontal Photo 2"></div>
-                            </div>
+                            <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/A5D674/FFFFFF?text=H+1" alt="Horizontal Photo 1"></div>
+                            <div class="project-image-box horizontal-box"><img src="https://placehold.co/500x200/7AB648/FFFFFF?text=H+2" alt="Horizontal Photo 2"></div>
                         </div>`
+                    },
+                    {
+                        title: 'E-commerce User Growth Strategy Review',
+                        content: '<strong>Background:</strong> Rising user acquisition costs in Q3, needing to optimize the growth funnel.<br><strong>My Role:</strong> Growth Product Manager<br><strong>Actions & Outcomes:</strong> Redesigned the new user onboarding process and introduced social referral mechanisms. Verified through A/B testing, ultimately increasing conversion rate by 15% and reducing acquisition cost by 20%. This project honed my data-driven decision-making and cross-departmental communication skills.'
+                    },
+                    {
+                        title: 'New Market Expansion Plan Execution Review',
+                        content: '<strong>Background:</strong> Needed to expand product reach to Tier-2 cities.<br><strong>My Role:</strong> Market Analyst<br><strong>Actions & Outcomes:</strong> Conducted market research and partnered with local channels. Achieved a 30% increase in regional sign-ups within 2 months.'
+                    },
+                    {
+                        title: 'Supply Chain Process Optimization Review',
+                        content: '<strong>Background:</strong> Logistics bottlenecks causing delivery delays.<br><strong>My Role:</strong> Operations Lead<br><strong>Actions & Outcomes:</strong> Re-mapped the supply chain workflow and integrated an automated tracking system, reducing average delivery time by 2 days.'
+                    },
+                    {
+                        title: 'Customer Satisfaction Improvement Initiative Review',
+                        content: '<strong>Background:</strong> NPS score was dropping in Q4.<br><strong>My Role:</strong> Customer Success Manager<br><strong>Actions & Outcomes:</strong> Introduced a proactive feedback loop and personalized follow-ups, improving the NPS score from 32 to 45.'
+                    },
+                    {
+                        title: 'Annual Mega Sale Event Coordination Review',
+                        content: '<strong>Background:</strong> Preparing for the biggest sale event of the year.<br><strong>My Role:</strong> Project Coordinator<br><strong>Actions & Outcomes:</strong> Synchronized efforts across marketing, tech, and operations. The event generated a record-breaking 200% growth in GMV.'
+                    },
+                    {
+                        title: 'Cross-Departmental Collaboration Mechanism Review',
+                        content: '<strong>Background:</strong> Siloed teams causing inefficiencies.<br><strong>My Role:</strong> Process Manager<br><strong>Actions & Outcomes:</strong> Established weekly syncs and a shared task board, cutting down project turnaround time by 25%.'
+                    },
+                    {
+                        title: 'Core Product Feature Revamp Review',
+                        content: '<strong>Background:</strong> User feedback indicated the search feature was clunky.<br><strong>My Role:</strong> Product Designer<br><strong>Actions & Outcomes:</strong> Simplified the UI and improved search algorithms, resulting in a 40% increase in search usage and fewer support tickets.'
+                    },
+                    {
+                        title: 'Brand Upgrade & Visual Identity Review',
+                        content: '<strong>Background:</strong> Company brand image felt outdated.<br><strong>My Role:</strong> Branding Lead<br><strong>Actions & Outcomes:</strong> Led the visual rebranding across all digital assets, increasing brand recall by 15% in post-campaign surveys.'
+                    },
+                    {
+                        title: 'Future Optimization & Iteration Planning Review',
+                        content: '<strong>Background:</strong> Need to set clear goals for the next quarter.<br><strong>My Role:</strong> Strategy Planner<br><strong>Actions & Outcomes:</strong> Defined 3 core OKRs and mapped out resource allocation, ensuring alignment across all teams for Q1 targets.'
                     }
                 ],
-                editBtn: 'Edit',
-                deleteBtn: 'Delete',
-                saveBtn: 'Save Review',
-                saveEditBtn: 'Save Changes',
-                titlePlaceholder: 'Enter project name...',
-                contentPlaceholder: 'Enter review content...',
-                deleteConfirm: 'Are you sure you want to delete this review?',
                 thanksTitle: 'Thanks for Visiting!',
                 thanksDesc: 'Please feel free to reach out'
             }
@@ -733,21 +622,17 @@
 
             const reviewsContainer = document.getElementById('reviews-container');
             reviewsContainer.innerHTML = '';
-            t.reviews.forEach(review => {
-                reviewsContainer.innerHTML += createReviewCardHTML(review.title, review.content, false);
+            t.reviews.forEach((review, index) => {
+                const isActive = index === 0 ? true : false; 
+                reviewsContainer.innerHTML += createReviewCardHTML(review.title, review.content, isActive);
             });
         }
 
         function createReviewCardHTML(title, content, isActive = true) {
-            const t = translations[currentLang];
             return `
                 <div class="review-card ${isActive ? 'active' : ''}">
                     <div class="card-header" onclick="toggleCard(this)">
                         <h3>${title}</h3>
-                    </div>
-                    <div class="card-actions">
-                        <button class="action-btn edit-btn" onclick="editCard(this)">${t.editBtn}</button>
-                        <button class="action-btn delete-btn" onclick="deleteCard(this)">${t.deleteBtn}</button>
                     </div>
                     <div class="card-content">
                         ${content}
@@ -756,272 +641,9 @@
             `;
         }
 
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // === 工作复盘：折叠、新增、编辑、删除 ===
         function toggleCard(headerElement) {
             const card = headerElement.closest('.review-card');
             card.classList.toggle('active');
-        }
-
-        function addNewEntry() {
-            const container = document.getElementById('reviews-container');
-            if (container.querySelector('.entry-editor')) {
-                container.querySelector('.entry-editor').scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
-            createEditor(container);
-        }
-
-        function createEditor(container, existingTitle = '', existingContent = '') {
-            const t = translations[currentLang];
-            const editorDiv = document.createElement('div');
-            editorDiv.className = 'entry-editor';
-            const btnText = existingTitle ? t.saveEditBtn : t.saveBtn;
-            
-            editorDiv.innerHTML = `
-                <input type="text" placeholder="${t.titlePlaceholder}" class="entry-title-input" value="${existingTitle}">
-                <textarea placeholder="${t.contentPlaceholder}">${existingContent}</textarea>
-                <div class="editor-footer">
-                    <button class="btn-save" onclick="saveEntry(this)">${btnText}</button>
-                </div>
-            `;
-            
-            container.appendChild(editorDiv);
-            editorDiv.scrollIntoView({ behavior: 'smooth' });
-            
-            const titleInput = editorDiv.querySelector('.entry-title-input');
-            const textArea = editorDiv.querySelector('textarea');
-            
-            titleInput.focus();
-
-            const handleBlur = (e) => {
-                if (editorDiv.contains(e.relatedTarget)) {
-                    return;
-                }
-                
-                const title = titleInput.value.trim();
-                const content = textArea.value.trim();
-                
-                if (!title && !content) {
-                    editorDiv.style.opacity = '0';
-                    editorDiv.style.transform = 'translateY(-10px)';
-                    setTimeout(() => editorDiv.remove(), 300);
-                } else if (title && content) {
-                    saveEntry(editorDiv.querySelector('.btn-save'));
-                }
-            };
-
-            titleInput.addEventListener('blur', handleBlur);
-            textArea.addEventListener('blur', handleBlur);
-        }
-
-        function saveEntry(buttonElement) {
-            const editorDiv = buttonElement.closest('.entry-editor');
-            const titleInput = editorDiv.querySelector('.entry-title-input');
-            const textArea = editorDiv.querySelector('textarea');
-            
-            const title = titleInput.value.trim();
-            const content = textArea.value.trim().replace(/\n/g, '<br>');
-            
-            if (!title || !content.replace(/<br>/g, '').trim()) {
-                titleInput.style.borderColor = !title ? '#e74c3c' : '';
-                textArea.style.borderColor = !content.replace(/<br>/g, '').trim() ? '#e74c3c' : '';
-                setTimeout(() => {
-                    titleInput.style.borderColor = '';
-                    textArea.style.borderColor = '';
-                }, 1500);
-                return;
-            }
-
-            const newCard = document.createElement('div');
-            newCard.className = 'review-card active';
-            newCard.innerHTML = createReviewCardHTML(title, content, true);
-
-            editorDiv.replaceWith(newCard);
-            newCard.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function deleteCard(buttonElement) {
-            const card = buttonElement.closest('.review-card');
-            const t = translations[currentLang];
-            if (confirm(t.deleteConfirm)) {
-                card.style.transition = 'all 0.3s ease';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(-10px)';
-                setTimeout(() => card.remove(), 300);
-            }
-        }
-
-        function editCard(buttonElement) {
-            const card = buttonElement.closest('.review-card');
-            const titleElement = card.querySelector('h3');
-            const contentElement = card.querySelector('.card-content');
-            
-            const originalContent = contentElement.innerText;
-
-            const container = document.getElementById('reviews-container');
-            const editorDiv = document.createElement('div');
-            editorDiv.className = 'entry-editor';
-            
-            const t = translations[currentLang];
-            editorDiv.innerHTML = `
-                <input type="text" class="entry-title-input" value="${titleElement.innerText}">
-                <textarea>${originalContent}</textarea>
-                <div class="editor-footer">
-                    <button class="btn-save" onclick="saveEntry(this)">${t.saveEditBtn}</button>
-                </div>
-            `;
-            
-            card.replaceWith(editorDiv);
-            editorDiv.scrollIntoView({ behavior: 'smooth' });
-            editorDiv.querySelector('input').focus();
-        }
-
-
-        // === 我的技能：添加、编辑、删除 ===
-        const bubblesContainer = document.getElementById('bubbles-container');
-
-        function addSkill() {
-            createSkillEditor(bubblesContainer);
-        }
-
-        function createSkillEditor(container, existingText = '') {
-            const editorBubble = document.createElement('div');
-            editorBubble.className = 'bubble bubble-editing';
-            editorBubble.innerHTML = `
-                <input type="text" placeholder="输入技能" value="${existingText}">
-                <span class="delete-skill-btn" onclick="deleteSkill(this)">✕</span>
-            `;
-            
-            container.appendChild(editorBubble);
-            const input = editorBubble.querySelector('input');
-            input.focus();
-            
-            if (existingText) {
-                input.setSelectionRange(existingText.length, existingText.length);
-            }
-
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    saveSkill(this);
-                } else if (e.key === 'Escape') {
-                    if (!existingText) {
-                        editorBubble.remove();
-                    } else {
-                        restoreSkillBubble(this, existingText);
-                    }
-                }
-            });
-
-            input.addEventListener('blur', function() {
-                setTimeout(() => {
-                    if (document.activeElement !== input) {
-                        saveSkill(this);
-                    }
-                }, 100);
-            });
-        }
-
-        function saveSkill(inputElement) {
-            const text = inputElement.value.trim();
-            const editorBubble = inputElement.closest('.bubble');
-
-            if (text) {
-                const newBubble = document.createElement('div');
-                newBubble.className = 'bubble';
-                newBubble.innerText = text;
-                editorBubble.replaceWith(newBubble);
-            } else {
-                editorBubble.remove();
-            }
-        }
-
-        function restoreSkillBubble(inputElement, text) {
-            const editorBubble = inputElement.closest('.bubble');
-            const newBubble = document.createElement('div');
-            newBubble.className = 'bubble';
-            newBubble.innerText = text;
-            editorBubble.replaceWith(newBubble);
-        }
-
-        function deleteSkill(buttonElement) {
-            const editorBubble = buttonElement.closest('.bubble');
-            editorBubble.style.transform = 'scale(0)';
-            setTimeout(() => editorBubble.remove(), 200);
-        }
-
-        bubblesContainer.addEventListener('click', function(e) {
-            const bubble = e.target.closest('.bubble');
-            if (bubble && !bubble.classList.contains('bubble-editing') && !e.target.classList.contains('delete-skill-btn')) {
-                const text = bubble.innerText.trim();
-                bubble.innerHTML = '';
-                bubble.classList.add('bubble-editing');
-                
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.value = text;
-                bubble.appendChild(input);
-                
-                const deleteBtn = document.createElement('span');
-                deleteBtn.className = 'delete-skill-btn';
-                deleteBtn.innerText = '✕';
-                deleteBtn.onclick = function() {
-                    bubble.style.transform = 'scale(0)';
-                    setTimeout(() => bubble.remove(), 200);
-                };
-                bubble.appendChild(deleteBtn);
-
-                input.focus();
-                input.setSelectionRange(text.length, text.length);
-
-                input.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        saveInlineSkill(this);
-                    } else if (e.key === 'Escape') {
-                        restoreInlineSkill(this, text);
-                    }
-                });
-
-                input.addEventListener('blur', function() {
-                    setTimeout(() => {
-                        if (document.activeElement !== input && document.activeElement !== deleteBtn) {
-                            saveInlineSkill(this);
-                        }
-                    }, 100);
-                });
-            }
-        });
-
-        function saveInlineSkill(inputElement) {
-            const text = inputElement.value.trim();
-            const bubble = inputElement.closest('.bubble');
-
-            if (text) {
-                bubble.classList.remove('bubble-editing');
-                bubble.innerHTML = '';
-                bubble.innerText = text;
-            } else {
-                bubble.style.transform = 'scale(0)';
-                setTimeout(() => bubble.remove(), 200);
-            }
-        }
-
-        function restoreInlineSkill(inputElement, originalText) {
-            const bubble = inputElement.closest('.bubble');
-            bubble.classList.remove('bubble-editing');
-            bubble.innerHTML = '';
-            bubble.innerText = originalText;
         }
 
         // 初始化页面语言为英文
